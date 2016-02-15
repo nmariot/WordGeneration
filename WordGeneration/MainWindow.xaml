@@ -1,0 +1,56 @@
+﻿<Window x:Class="WordGeneration.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WordGeneration"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Word documents generation" Height="350" Width="525" ResizeMode="NoResize" Icon="word.ico">
+    <Window.Resources>
+        <sys:Double x:Key="Width">275</sys:Double>
+        <Thickness x:Key="RightAlignMargin">285,0,0,0</Thickness>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Row 0 -->
+        <Label  Content="Nb of docs to generate :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="txtNbDocs" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1000" VerticalAlignment="Center" Width="{StaticResource Width}" Grid.Column="1"/>
+        <!-- Row 1 -->
+        <Label Content="Nb of files per folder :" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Row="1"/>
+        <TextBox x:Name="txtFilesPerFolder" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1000" VerticalAlignment="Center" Width="{StaticResource Width}" Grid.Row="1" Grid.Column="1"/>
+        <!-- Row 2 -->
+        <Label Content="Nb of folders per folder :" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2"/>
+        <TextBox x:Name="txtFoldersPerFolder" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="100" VerticalAlignment="Center" Width="{StaticResource Width}" Grid.Row="2" Grid.Column="1" />
+        <!-- Row 3 -->
+        <Label Content="Nb of paragraphs per document :" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" />
+        <Slider x:Name="sldParaPerDoc" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" Width="{StaticResource Width}" Minimum="1" Maximum="100" SmallChange="1" LargeChange="10" Value="10" IsSnapToTickEnabled="True" TickFrequency="1"/>
+        <Label Margin="{StaticResource RightAlignMargin}" Grid.Column="1" Grid.Row="3"  Content="{Binding Value, ElementName=sldParaPerDoc}" VerticalAlignment="Center"/>
+        <!-- Row 4 -->
+        <Label Content="Nb of words per paragraph :" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" />
+        <Slider x:Name="sldWordsPerPara" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Center" Width="{StaticResource Width}" Minimum="1" Maximum="100" SmallChange="1" LargeChange="10" Value="50" IsSnapToTickEnabled="True" TickFrequency="1"/>
+        <Label Margin="{StaticResource RightAlignMargin}" Grid.Column="1" Grid.Row="4" Content="{Binding Value, ElementName=sldWordsPerPara}" VerticalAlignment="Center"/>
+        <!-- Row 5 -->
+        <Label Content="Generation folder :" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" />
+        <TextBox x:Name="txtGenerationFolder" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="d:\" VerticalAlignment="Center" Width="{StaticResource Width}" Grid.Column="1" Grid.Row="5" />
+        <Button x:Name="btnGenerationFolder" Content="..." Grid.Row="5" Grid.Column="1" Width="23" Height="23" HorizontalAlignment="Left" Margin="{StaticResource RightAlignMargin}" Click="btnGenerationFolder_Click"/>
+        <!-- Row 6 -->
+        <Button x:Name="btnGo" IsDefault="True" Content="Generate documents" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,10,0" Grid.Row="6" VerticalAlignment="Stretch" Click="btnGo_Click" />
+        <!-- Row 7 -->
+        <ProgressBar x:Name="pbProgress" Grid.Row="7" Grid.ColumnSpan="2" Margin="10,10,10,10" Value="50"/>
+        <TextBlock x:Name="txtProgress" Text="{Binding Value, ElementName=pbProgress, Mode=OneWay, StringFormat=\{0:0\}%}" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>
